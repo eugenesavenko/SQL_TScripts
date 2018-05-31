@@ -1,34 +1,28 @@
-﻿-------------------------------------------
--- Показывает фрагментированные индексы для указанной базы данных
--- Автор: Онянов Виталий (Tavalik.ru)
--- Версия от 20.05.2017
--- Свежие версии скриптов: https://github.com/Tavalik/SQL_TScripts
+SET ANSI_NULLS        ON                              ;
+SET NOCOUNT           ON                              ;
+SET QUOTED_IDENTIFIER ON                              ;
+SET TRANSACTION       ISOLATION LEVEL READ UNCOMMITTED;
 
--------------------------------------------
--- НАСТРАИВАЕМЫЕ ПЕРЕМЕННЫЕ
--- База данных для анализа
-USE WorkBase 
+DECLARE @base       AS VARCHAR (max) = 'testpatiobuh';
+DECLARE @fragmental AS INT            = 5             ;
+DECLARE @index      AS INT            = 0             ;
+DECLARE @page       AS INT            = 100           ;
+DECLARE @sql        AS NVARCHAR (max) = ''            ;
 
--------------------------------------------
--- ТЕЛО СКРИПТА
+SET @base = 'USE ' + @base + ';';
+PRINT @base;
 
--- Отбираем объекты, которые:
---	 являются индексами (index_id > 0)
---   фрагментация которых более 5% 
---   количество страниц в индексе более 128
 SELECT
-	OBJECT_NAME(object_id) AS TableName, 
-	object_id,
-    index_id,
-    partition_number,
-	page_count, 
-	partition_number, 
-	index_type_desc,
-    avg_fragmentation_in_percent
-FROM sys.dm_db_index_physical_stats (DB_ID(), NULL, NULL , NULL, 'LIMITED')
-WHERE index_id > 0 
-	AND avg_fragmentation_in_percent > 5.0
-	AND page_count > 128
-ORDER BY avg_fragmentation_in_percent DESC
-
-GO
+    OBJECT_NAME (object_id)      AS [table     ],
+    object_id                    AS [object    ],
+    avg_fragmentation_in_percent AS [fragmental],
+    index_id                     AS [index     ],
+    index_type_desc              AS [type      ],
+    page_count                   AS [page      ],
+    partition_number             AS [partition ]
+FROM
+    sys.dm_db_index_physical_stats (DB_ID(), NULL, NULL , NULL, 'LIMITED')
+WHERE    index_id > @index
+AND      avg_fragmentation_in_percent > @fragmental
+AND      page_count > @page
+ORDER BY avg_fragmentation_in_percent DESC;
