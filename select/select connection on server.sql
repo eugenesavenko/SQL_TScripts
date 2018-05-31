@@ -3,7 +3,6 @@ SET NOCOUNT           ON                              ;
 SET QUOTED_IDENTIFIER ON                              ;
 SET TRANSACTION       ISOLATION LEVEL READ UNCOMMITTED;
 
-
 SELECT
     program_name  AS [name    ],
     net_transport AS [protocol]
