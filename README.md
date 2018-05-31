@@ -1,2 +1,2 @@
-#sql script
-Скрипты для MS SQL Сервера
+#sql script example
+Примеры sql скриптов
