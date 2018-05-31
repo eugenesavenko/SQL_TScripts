@@ -1,2 +1,2 @@
-# SQL_TScripts
+#sql script
 Скрипты для MS SQL Сервера
