@@ -3,9 +3,8 @@ SET NOCOUNT           ON                              ;
 SET QUOTED_IDENTIFIER ON                              ;
 SET TRANSACTION       ISOLATION LEVEL READ UNCOMMITTED;
 
-DECLARE @base AS VARCHAR  (max) = 'testbase';
-DECLARE @sql  AS NVARCHAR (max) = '';
+DECLARE @base AS NVARCHAR (max) = 'testdatabaseone';
+DECLARE @sql  AS NVARCHAR (max) = ''            ;
 
-SET @sql = 'ALTER DATABASE ' + @base + ' SET RECOVERY SIMPLE WITH NO_WAIT;';
-PRINT @sql;
+SELECT @sql = 'ALTER DATABASE ' + @base + ' SET RECOVERY SIMPLE WITH NO_WAIT;';
 EXEC sp_executesql @sql;

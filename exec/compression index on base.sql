@@ -3,4 +3,5 @@ SET NOCOUNT           ON                              ;
 SET QUOTED_IDENTIFIER ON                              ;
 SET TRANSACTION       ISOLATION LEVEL READ UNCOMMITTED;
 
-ALTER DATABASE testdatabaseone SET ALLOW_SNAPSHOT_ISOLATION ON;--enter the name of the database
+USE testdatabaseone;
+EXEC sp_MSforeachtable 'ALTER INDEX ALL ON ? REBUILD WITH (DATA_COMPRESSION = PAGE)';

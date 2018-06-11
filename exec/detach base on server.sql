@@ -3,4 +3,5 @@ SET NOCOUNT           ON                              ;
 SET QUOTED_IDENTIFIER ON                              ;
 SET TRANSACTION       ISOLATION LEVEL READ UNCOMMITTED;
 
-ALTER DATABASE testdatabaseone SET ALLOW_SNAPSHOT_ISOLATION ON;--enter the name of the database
+EXEC sp_detach_db 'testdatabaseone', 'true';
+EXEC sp_detach_db 'testdatabasetwo', 'true';

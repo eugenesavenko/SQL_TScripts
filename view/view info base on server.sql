@@ -5,9 +5,9 @@ SET TRANSACTION       ISOLATION LEVEL READ UNCOMMITTED;
 
 SELECT
     @@SERVERNAME        AS [server],
-    Compatibility_level AS [level ],
     create_date         AS [date  ],
     name                AS [base  ],
+    Compatibility_level AS [level ],
     recovery_model_desc AS [model ],
     state_desc          AS [state ]
 FROM sys.databases

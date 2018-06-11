@@ -3,9 +3,5 @@ SET NOCOUNT           ON                              ;
 SET QUOTED_IDENTIFIER ON                              ;
 SET TRANSACTION       ISOLATION LEVEL READ UNCOMMITTED;
 
-DECLARE @base AS VARCHAR  (max) = 'testbase';
-DECLARE @sql  AS NVARCHAR (max) = '';
-
-SET @sql = 'DBCC SHRINKDATABASE(N''' + @base + ''');';
-PRINT @sql;
-EXEC sp_executesql @sql;
+USE [testdatabaseone]; DBCC SHRINKFILE (N'testdatabaseone_log' , 0);
+USE [testdatabasetwo]; DBCC SHRINKFILE (N'testdatabasetwo_log' , 0);
