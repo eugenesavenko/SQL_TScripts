@@ -4,11 +4,10 @@ SET QUOTED_IDENTIFIER ON                              ;
 SET TRANSACTION       ISOLATION LEVEL READ UNCOMMITTED;
 
 SELECT
-    database_id   AS [id  ],
-    name          AS [base],
-    physical_name AS [file],
-    size          AS [size],
-    type_desc     AS [type]
+    database_id      AS [id        ],
+    name             AS [base      ],
+    physical_name    AS [file      ],
+    size*8/1024/1024 AS [size in gb],
+    type_desc        AS [type      ]
 FROM sys.master_files
-WHERE name NOT IN ('master', 'msdb', 'model', 'tempdb', 'distribution')
 ORDER BY size DESC;
