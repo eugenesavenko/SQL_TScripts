@@ -3,4 +3,7 @@ SET NOCOUNT           ON                              ;
 SET QUOTED_IDENTIFIER ON                              ;
 SET TRANSACTION       ISOLATION LEVEL READ UNCOMMITTED;
 
-DBCC SQLPERF ('sys.dm_os_wait_stats', CLEAR);
+EXEC sp_configure 'show advanced options', 1;
+RECONFIGURE WITH OVERRIDE;
+EXEC sp_configure 'xp_cmdshell', 1;
+RECONFIGURE WITH OVERRIDE;

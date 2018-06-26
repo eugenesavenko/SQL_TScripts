@@ -3,4 +3,8 @@ SET NOCOUNT           ON                              ;
 SET QUOTED_IDENTIFIER ON                              ;
 SET TRANSACTION       ISOLATION LEVEL READ UNCOMMITTED;
 
-DBCC SQLPERF ('sys.dm_os_wait_stats', CLEAR);
+SELECT
+    status             AS [status],
+    count (session_id) AS [total ]
+FROM sys.dm_exec_sessions
+GROUP BY [status];
